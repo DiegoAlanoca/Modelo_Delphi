@@ -12,7 +12,6 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 32
   object Label1: TLabel
     Left = 26

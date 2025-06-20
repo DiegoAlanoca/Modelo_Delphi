@@ -13,9 +13,12 @@
     <Transaction>2025/05/08 17:00:05.000.221,=E:\Delphi\Modelo Completo\Unit1.pas</Transaction>
     <Transaction>2025/05/08 17:18:05.000.202,E:\Delphi\Modelo Completo\Unit1.pas=E:\Delphi\Modelo Completo\clasevectores.pas</Transaction>
     <Transaction>2025/05/29 16:22:17.000.078,=D:\Delphi\Modelo Completo\Unit2.pas</Transaction>
-    <Transaction>2025/05/29 16:22:50.000.197,D:\Delphi\Modelo Completo\Unit2.pas=D:\Delphi\Modelo Completo\formalum.pas</Transaction>
     <Transaction>2025/05/29 16:22:50.000.197,D:\Delphi\Modelo Completo\Unit2.dfm=D:\Delphi\Modelo Completo\formalum.dfm</Transaction>
+    <Transaction>2025/05/29 16:22:50.000.197,D:\Delphi\Modelo Completo\Unit2.pas=D:\Delphi\Modelo Completo\formalum.pas</Transaction>
     <Transaction>2025/05/29 16:45:31.000.876,=D:\Delphi\Modelo Completo\Unit1.pas</Transaction>
     <Transaction>2025/05/29 16:46:09.000.502,D:\Delphi\Modelo Completo\Unit1.pas=D:\Delphi\Modelo Completo\clasevectnotas.pas</Transaction>
+    <Transaction>2025/06/20 14:50:36.103,=C:\Users\vboxuser\Desktop\Modelo_Delphi\Unit2.pas</Transaction>
+    <Transaction>2025/06/20 14:50:58.025,C:\Users\vboxuser\Desktop\Modelo_Delphi\form_Vect_Matr.dfm=C:\Users\vboxuser\Desktop\Modelo_Delphi\Unit2.dfm</Transaction>
+    <Transaction>2025/06/20 14:50:58.025,C:\Users\vboxuser\Desktop\Modelo_Delphi\form_Vect_Matr.pas=C:\Users\vboxuser\Desktop\Modelo_Delphi\Unit2.pas</Transaction>
   </Transactions>
 </BorlandProject>

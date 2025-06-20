@@ -4,26 +4,25 @@ interface
 uses sysutils,dialogs;
 const MaxE=1024;
 type
-  vectreal = array of Real; //ver
+  vectrcad = array of String;
 type
   vectores = class
   private
-    vect:Array[1..MaxE] of Real;
-    dimension:Word;
+
   public
-   procedure addend(numr:Real);
-   procedure emptyvec;
-   procedure delelem(p:word);
-   procedure modelem(p:Word;e:Real);
-   function mostrarnvect(pos:Word):Real;
-   Function busquedasec(e:Real):Word;
-   Function busquebin(e:Real):Word;
+    vect:Array[1..MaxE] of Real; //Comienza en 1
+    dimension:Word;
+    constructor create;
+    procedure addend(numr:Real);
+    procedure emptyvec;
+    procedure delelem(p:word);
+    procedure modelem(p:Word;e:Real);
+    function mostrarnvect(pos:Word):Real;
+    Function busquedasec(e:Real):Word;
+    Function busquebin(e:Real):Word;
   end;
 
 implementation
-
-{ vectores }
-
 
 { vectores }
 
@@ -70,10 +69,10 @@ end;
 procedure vectores.delelem(p: word);
 var I: Word;
 begin
-  for I := p to dimension do
-  begin
-    vect[I]:=vect[I+1];
-  end;
+  if (p>=1)and(p<=Dimension) then
+    for I := p to dimension do
+      vect[I]:=vect[I+1]
+  else raise Exception.Create('Posicion invalida');
   Dec(Dimension);
 end;
 
@@ -85,9 +84,15 @@ begin
     vect[I]:=0;
 end;
 
+constructor vectores.create;
+begin
+  dimension:=0;
+  emptyvec;
+end;
+
 procedure vectores.modelem(p: Word; e: Real);
 begin
-  if (p>=0)and(p<=Dimension) then
+  if (p>=1)and(p<=Dimension) then
     vect[p]:=e
   else raise Exception.Create('Posicion no valida');
 end;
