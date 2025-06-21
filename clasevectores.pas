@@ -42,13 +42,19 @@ type
     procedure mezclar(izq,medio,der:Integer);
     procedure mergesort(izq, der: Integer);
     procedure modelexam5(e:String);
+    procedure modelexam6;
+    procedure burbujaAscRef(var VectEntr:vectrealaux;var dimEntr:Integer);
+    procedure burbujaDscRef(var VectEntr:vectrealaux;var dimEntr:Integer);
 
+    function VerificarPrimo(num:Integer):Boolean;
     function ConvStrEnVectRealConComas(s:String):vectrealaux;
     procedure InsElemVect(e:Real;pos:Word);
     procedure intercamb(p1,p2:Word);
     procedure quickshortexe;
     procedure mergesortexe;
-  end;
+    procedure intercambporRefer(var p1,p2:Word;var vectEntra:vectrealaux);
+    procedure registrarVectReal(VectEntr:vectrealaux);
+end;
 
 implementation
 
@@ -70,6 +76,19 @@ begin
         intercamb(J,J+1);
 end;
 
+
+procedure vectores.burbujaAscRef(var VectEntr: vectrealaux;var dimEntr:Integer);
+var I,J,P: Word;
+begin
+  for I := 0 to dimEntr-2 do
+    for J := 0 to dimEntr-I-2 do
+      if VectEntr[J]>VectEntr[J+1] then
+      begin
+        P:=J+1;
+        intercambporRefer(J,P,VectEntr);
+      end;
+end;
+
 procedure vectores.burbujaDsc;
 var I,J: Integer;
 begin
@@ -77,6 +96,19 @@ begin
     for J := 1 to Dimension-I do
       if vect[J]<vect[J+1] then
         intercamb(J,J+1);
+end;
+
+procedure vectores.burbujaDscRef(var VectEntr: vectrealaux;
+  var dimEntr: Integer);
+var I,J,P: Word;
+begin
+  for I := 0 to dimEntr-2 do
+    for J := 0 to dimEntr-I-2 do
+      if VectEntr[J]<VectEntr[J+1] then
+      begin
+        P:=J+1;
+        intercambporRefer(J,P,VectEntr);
+      end;
 end;
 
 function vectores.busquebin(e: Real): Word;  //Antes ordenado
@@ -109,8 +141,6 @@ begin
   until (vect[I]=e);
   result:=I;
 end;
-
-
 
 function vectores.ConvStrEnVectRealConComas(s: String): vectrealaux;
 var I, J: Integer;
@@ -159,7 +189,6 @@ begin
     vect[I]:=0;
 end;
 
-
 procedure vectores.InsElemVect(e: Real; pos: Word);
 var I: Integer;
 begin
@@ -176,6 +205,14 @@ begin
   aux:=vect[p1];
   vect[p1]:=vect[p2];
   vect[p2]:=aux;
+end;
+
+procedure vectores.intercambporRefer(var p1, p2: Word;var vectEntra:vectrealaux);
+var aux:Real;
+begin
+  aux:=vectEntra[p1];
+  vectEntra[p1]:=vectEntra[p2];
+  vectEntra[p2]:=aux;
 end;
 
 constructor vectores.create;
@@ -266,6 +303,40 @@ begin
   Dec(dimension);
 end;
 
+procedure vectores.modelexam6;
+var I,J,dimprim,dimnoprim: Integer; numprim,numnoprim,vectfin:vectrealaux;
+begin
+  dimprim:=0; dimnoprim:=0; SetLength(numprim, 0);
+  SetLength(numnoprim, 0);
+  for I := 1 to dimension do
+  begin
+    if VerificarPrimo(Trunc(vect[I]))=True then
+    begin
+      inc(dimprim);
+      setlength(numprim,dimprim);
+      numprim[dimprim-1]:=vect[I];
+    end
+    else
+    begin
+      inc(dimnoprim);
+      setlength(numnoprim,dimnoprim);
+      numnoprim[dimnoprim-1]:=vect[I];
+    end;
+  end;
+  burbujaAscRef(numprim,dimprim);
+  burbujaDscRef(numnoprim,dimnoprim);
+  setlength(vectfin,dimprim+dimnoprim);
+  for I := 0 to dimprim-1 do
+    vectfin[I]:=numprim[I];
+  J:=0;
+  for I := dimprim to length(vectfin)-1 do
+  begin
+    vectfin[I]:=numnoprim[J];
+    Inc(J);
+  end;
+  registrarVectReal(vectfin);
+end;
+
 function vectores.mostrarnvect(pos: Word): Real;
 begin
   if (pos>=1)and(pos<=dimension) then
@@ -312,6 +383,36 @@ begin
     QuickSort(izq, j);
   if i < der then
     QuickSort(i, der);
+end;
+
+
+
+procedure vectores.registrarVectReal(VectEntr: vectrealaux);
+var I:Word;
+begin
+  emptyvec;
+  for I := 0 to length(VectEntr)-1 do
+    addend(VectEntr[I]);
+end;
+
+function vectores.VerificarPrimo(num: Integer): Boolean;
+var
+  I: Integer;
+begin
+  if num <= 1 then
+    Exit(False);
+  if num = 2 then
+    Exit(True);
+  if (num mod 2) = 0 then
+    Exit(False);
+  I := 3;
+  while I * I <= num do
+  begin
+    if (num mod I) = 0 then
+      Exit(False);
+    Inc(I, 2);
+  end;
+  Result := True;
 end;
 
 { vectorescadenas }

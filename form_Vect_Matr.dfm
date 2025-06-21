@@ -232,6 +232,10 @@ object Form2: TForm2
         Caption = '5 Insertar string de reales 2,3,6,...'
         OnClick = N5Insertarstringdereales2361Click
       end
+      object N6ordenarprimosynoprimos1: TMenuItem
+        Caption = '6 ordenar primos y no primos'
+        OnClick = N6ordenarprimosynoprimos1Click
+      end
     end
     object Matrices1: TMenuItem
       Caption = 'Matrices'

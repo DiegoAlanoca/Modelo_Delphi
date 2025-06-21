@@ -43,6 +43,7 @@ type
     N4Contarcuantasvecesserepiteunelem1: TMenuItem;
     N5Insertarstringdereales2361: TMenuItem;
     InsertarElemenPos2: TMenuItem;
+    N6ordenarprimosynoprimos1: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -68,6 +69,7 @@ type
     procedure N4Contarcuantasvecesserepiteunelem1Click(Sender: TObject);
     procedure N5Insertarstringdereales2361Click(Sender: TObject);
     procedure InsertarElemenPos2Click(Sender: TObject);
+    procedure N6ordenarprimosynoprimos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -154,6 +156,11 @@ end;
 procedure TForm2.N5Insertarstringdereales2361Click(Sender: TObject);
 begin
   vectr.modelexam5(elemento.Text);
+end;
+
+procedure TForm2.N6ordenarprimosynoprimos1Click(Sender: TObject);
+begin
+  vectr.modelexam6;
 end;
 
 procedure TForm2.QuicjShort1Click(Sender: TObject);
