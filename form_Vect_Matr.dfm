@@ -190,6 +190,7 @@ object Form2: TForm2
       end
       object BurbujaAscendente1: TMenuItem
         Caption = 'Burbuja Ascendente'
+        OnClick = BurbujaAscendente1Click
       end
       object EliminarnElementoPosicion1: TMenuItem
         Caption = 'Eliminar n Elemento Posicion'
@@ -203,9 +204,48 @@ object Form2: TForm2
         Caption = 'Mostrar Vector Pos'
         OnClick = MostrarVectorPos2Click
       end
+      object BurbujaDescendente1: TMenuItem
+        Caption = 'Burbuja Descendente'
+        OnClick = BurbujaDescendente1Click
+      end
+      object QuicjShort1: TMenuItem
+        Caption = 'QuickShort'
+        OnClick = QuicjShort1Click
+      end
+      object MergeSort1: TMenuItem
+        Caption = 'MergeSort'
+        OnClick = MergeSort1Click
+      end
+      object BusquedaSecuencial1: TMenuItem
+        Caption = 'Busqueda Secuencial'
+        OnClick = BusquedaSecuencial1Click
+      end
+      object BuquedaBinaria1: TMenuItem
+        Caption = 'Buqueda Binaria'
+        OnClick = BuquedaBinaria1Click
+      end
     end
     object Matrices1: TMenuItem
       Caption = 'Matrices'
+    end
+    object VectoresString1: TMenuItem
+      Caption = 'Vectores String'
+      object Registrar2: TMenuItem
+        Caption = 'Registrar'
+        OnClick = Registrar2Click
+      end
+      object Registrar3: TMenuItem
+        Caption = 'Mostrar'
+        OnClick = Registrar3Click
+      end
+      object VectoresString2: TMenuItem
+        Caption = '3 Contar cuantos terminan y comienzan vocal'
+        OnClick = VectoresString2Click
+      end
+      object N4Contarcuantasvecesserepiteunelem1: TMenuItem
+        Caption = '4 Contar cuantas veces se repite un elem'
+        OnClick = N4Contarcuantasvecesserepiteunelem1Click
+      end
     end
   end
 end

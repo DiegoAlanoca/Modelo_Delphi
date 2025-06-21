@@ -31,6 +31,16 @@ type
     EliminarnElementoPosicion1: TMenuItem;
     ModificarelementoPosEle1: TMenuItem;
     MostrarVectorPos2: TMenuItem;
+    BurbujaDescendente1: TMenuItem;
+    QuicjShort1: TMenuItem;
+    MergeSort1: TMenuItem;
+    BusquedaSecuencial1: TMenuItem;
+    BuquedaBinaria1: TMenuItem;
+    VectoresString1: TMenuItem;
+    VectoresString2: TMenuItem;
+    Registrar2: TMenuItem;
+    Registrar3: TMenuItem;
+    N4Contarcuantasvecesserepiteunelem1: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -44,6 +54,16 @@ type
     procedure EliminarnElementoPosicion1Click(Sender: TObject);
     procedure ModificarelementoPosEle1Click(Sender: TObject);
     procedure MostrarVectorPos2Click(Sender: TObject);
+    procedure BurbujaAscendente1Click(Sender: TObject);
+    procedure BurbujaDescendente1Click(Sender: TObject);
+    procedure QuicjShort1Click(Sender: TObject);
+    procedure MergeSort1Click(Sender: TObject);
+    procedure BusquedaSecuencial1Click(Sender: TObject);
+    procedure BuquedaBinaria1Click(Sender: TObject);
+    procedure Registrar2Click(Sender: TObject);
+    procedure VectoresString2Click(Sender: TObject);
+    procedure Registrar3Click(Sender: TObject);
+    procedure N4Contarcuantasvecesserepiteunelem1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,11 +72,31 @@ type
 
 var
   Form2: TForm2;
-  vectr : vectores; //Comienza en 0
-
+  vectr : vectores; //Comienza en 0 stringrid[Columna,Fila];
+  vectstr : vectorescadenas;
 implementation
 
 {$R *.dfm}
+
+procedure TForm2.BuquedaBinaria1Click(Sender: TObject);
+begin
+  resultado.caption:=FloatToStr(vectr.busquebin(StrToFloat(elemento.Text)));
+end;
+
+procedure TForm2.BurbujaAscendente1Click(Sender: TObject);
+begin
+  vectr.burbujaAsc;
+end;
+
+procedure TForm2.BurbujaDescendente1Click(Sender: TObject);
+begin
+  vectr.burbujaDsc;
+end;
+
+procedure TForm2.BusquedaSecuencial1Click(Sender: TObject);
+begin
+  resultado.Caption:=IntToStr(vectr.busquedasec(StrToFloat(elemento.Text)));
+end;
 
 procedure TForm2.EliminarnElementoPosicion1Click(Sender: TObject);
 begin
@@ -66,6 +106,12 @@ end;
 procedure TForm2.FormCreate(Sender: TObject);
 begin
   vectr:=vectores.Create;
+  vectstr:=vectorescadenas.create;
+end;
+
+procedure TForm2.MergeSort1Click(Sender: TObject);
+begin
+  vectr.mergesortexe;
 end;
 
 procedure TForm2.ModificarelementoPosEle1Click(Sender: TObject);
@@ -91,6 +137,16 @@ begin
   resultado.Caption:=FloatToStr(vectr.mostrarnvect(StrToInt(posicion.Text)));
 end;
 
+procedure TForm2.N4Contarcuantasvecesserepiteunelem1Click(Sender: TObject);
+begin
+  resultado.Caption:=IntToStr(vectstr.modeloexam4(elemento.Text));
+end;
+
+procedure TForm2.QuicjShort1Click(Sender: TObject);
+begin
+  vectr.quickshortexe;
+end;
+
 procedure TForm2.Registrar1Click(Sender: TObject);
 var I:Word;
 begin
@@ -98,6 +154,28 @@ begin
   while (I<=vectorstr.ColCount-1)and(vectorstr.Cells[I,0]<>'') do
   begin
     vectr.addend(StrToFloat(vectorstr.Cells[I,0]));
+    Inc(I);
+  end;
+end;
+
+procedure TForm2.Registrar2Click(Sender: TObject);
+var I:Word;
+begin
+  vectstr.emptyvec; I:=0;
+  while (I<=vectorstr.ColCount-1)and(vectorstr.Cells[I,0]<>'') do
+  begin
+    vectstr.addendelem(vectorstr.Cells[I,0]);
+    Inc(I);
+  end;
+end;
+
+procedure TForm2.Registrar3Click(Sender: TObject);
+var I: Integer;
+begin
+  I:=0;
+  while (I<=vectorstr.ColCount-1)and(I+1<=vectstr.dimensioncad) do
+  begin
+    vectorstr.Cells[I,0]:=vectstr.vectcad[I+1];
     Inc(I);
   end;
 end;
@@ -131,6 +209,11 @@ begin
       LineTo(Rect.Left, Rect.Bottom);
       LineTo(Rect.Left, Rect.Top);
     end;                             }
+end;
+
+procedure TForm2.VectoresString2Click(Sender: TObject);
+begin
+  resultado.Caption:=IntToStr(vectstr.modelexam3);
 end;
 
 procedure TForm2.vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
