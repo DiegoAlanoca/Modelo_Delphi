@@ -224,6 +224,14 @@ object Form2: TForm2
         Caption = 'Buqueda Binaria'
         OnClick = BuquedaBinaria1Click
       end
+      object InsertarElemenPos2: TMenuItem
+        Caption = 'Insertar Elem en Pos'
+        OnClick = InsertarElemenPos2Click
+      end
+      object N5Insertarstringdereales2361: TMenuItem
+        Caption = '5 Insertar string de reales 2,3,6,...'
+        OnClick = N5Insertarstringdereales2361Click
+      end
     end
     object Matrices1: TMenuItem
       Caption = 'Matrices'

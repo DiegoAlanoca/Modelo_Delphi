@@ -41,6 +41,8 @@ type
     Registrar2: TMenuItem;
     Registrar3: TMenuItem;
     N4Contarcuantasvecesserepiteunelem1: TMenuItem;
+    N5Insertarstringdereales2361: TMenuItem;
+    InsertarElemenPos2: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -64,6 +66,8 @@ type
     procedure VectoresString2Click(Sender: TObject);
     procedure Registrar3Click(Sender: TObject);
     procedure N4Contarcuantasvecesserepiteunelem1Click(Sender: TObject);
+    procedure N5Insertarstringdereales2361Click(Sender: TObject);
+    procedure InsertarElemenPos2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -109,6 +113,11 @@ begin
   vectstr:=vectorescadenas.create;
 end;
 
+procedure TForm2.InsertarElemenPos2Click(Sender: TObject);
+begin
+  vectr.InsElemVect(StrToFloat(elemento.Text),StrToInt(posicion.Text));
+end;
+
 procedure TForm2.MergeSort1Click(Sender: TObject);
 begin
   vectr.mergesortexe;
@@ -140,6 +149,11 @@ end;
 procedure TForm2.N4Contarcuantasvecesserepiteunelem1Click(Sender: TObject);
 begin
   resultado.Caption:=IntToStr(vectstr.modeloexam4(elemento.Text));
+end;
+
+procedure TForm2.N5Insertarstringdereales2361Click(Sender: TObject);
+begin
+  vectr.modelexam5(elemento.Text);
 end;
 
 procedure TForm2.QuicjShort1Click(Sender: TObject);

@@ -5,6 +5,9 @@ uses sysutils,dialogs;
 const MaxE=1024;
 voc:set of Char=['A','E','I','O','U','a','e','i','o','u'];
 type
+  vectrealaux=Array of Real;       //Empieza en 0
+
+type
   vectorescadenas = class
   private
 
@@ -38,7 +41,10 @@ type
     procedure quicksort(izq,der:Integer);
     procedure mezclar(izq,medio,der:Integer);
     procedure mergesort(izq, der: Integer);
+    procedure modelexam5(e:String);
 
+    function ConvStrEnVectRealConComas(s:String):vectrealaux;
+    procedure InsElemVect(e:Real;pos:Word);
     procedure intercamb(p1,p2:Word);
     procedure quickshortexe;
     procedure mergesortexe;
@@ -105,6 +111,36 @@ begin
 end;
 
 
+
+function vectores.ConvStrEnVectRealConComas(s: String): vectrealaux;
+var I, J: Integer;
+  numStr: String;
+  vectaux: vectrealaux;
+begin
+  setlength(vectaux, 0);
+  numStr := '';
+  s := s + ',';
+  for I := 1 to Length(s) do
+  begin
+    if s[I] = ',' then
+    begin
+      if numStr <> '' then
+      begin
+        J := Length(vectaux);
+        SetLength(vectaux, J + 1);
+        vectaux[J] := StrToFloat(numStr);
+        numStr := '';
+      end;
+    end
+    else
+    begin
+      if (s[I] in ['0'..'9']) or (s[I] = '.') then
+         numStr := numStr + s[I];
+    end;
+  end;
+  Result := vectaux;
+end;
+
 procedure vectores.delelem(p: word);
 var I: Word;
 begin
@@ -123,6 +159,16 @@ begin
     vect[I]:=0;
 end;
 
+
+procedure vectores.InsElemVect(e: Real; pos: Word);
+var I: Integer;
+begin
+  Inc(dimension);
+  for I := dimension downto pos+1 do
+    vect[I]:=vect[I-1];
+
+  vect[pos]:=e;
+end;
 
 procedure vectores.intercamb(p1, p2: Word);
 var aux:Real;
@@ -201,6 +247,23 @@ begin
   if (p>=1)and(p<=Dimension) then
     vect[p]:=e
   else raise Exception.Create('Posicion no valida');
+end;
+
+procedure vectores.modelexam5(e: String);
+var vectaux:vectrealaux; I,J: Integer;
+begin
+  vectaux:=ConvStrEnVectRealConComas(e);
+  Inc(dimension); vect[dimension]:=5000;
+  for I := 0 to length(vectaux)-1 do
+  begin
+    J:=0;
+    Repeat
+      Inc(J);
+    Until vectaux[I]<vect[J];
+    InsElemVect(vectaux[I],J);
+  end;
+  vect[dimension]:=0;
+  Dec(dimension);
 end;
 
 function vectores.mostrarnvect(pos: Word): Real;
