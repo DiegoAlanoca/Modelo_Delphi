@@ -44,6 +44,9 @@ type
     N5Insertarstringdereales2361: TMenuItem;
     InsertarElemenPos2: TMenuItem;
     N6ordenarprimosynoprimos1: TMenuItem;
+    Stringquickshort1: TMenuItem;
+    StringquickshortAscendente1: TMenuItem;
+    ModeloExamen71: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -70,6 +73,9 @@ type
     procedure N5Insertarstringdereales2361Click(Sender: TObject);
     procedure InsertarElemenPos2Click(Sender: TObject);
     procedure N6ordenarprimosynoprimos1Click(Sender: TObject);
+    procedure Stringquickshort1Click(Sender: TObject);
+    procedure StringquickshortAscendente1Click(Sender: TObject);
+    procedure ModeloExamen71Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -123,6 +129,11 @@ end;
 procedure TForm2.MergeSort1Click(Sender: TObject);
 begin
   vectr.mergesortexe;
+end;
+
+procedure TForm2.ModeloExamen71Click(Sender: TObject);
+begin
+  vectstr.ModeloExam7;
 end;
 
 procedure TForm2.ModificarelementoPosEle1Click(Sender: TObject);
@@ -230,6 +241,16 @@ begin
       LineTo(Rect.Left, Rect.Bottom);
       LineTo(Rect.Left, Rect.Top);
     end;                             }
+end;
+
+procedure TForm2.Stringquickshort1Click(Sender: TObject);
+begin
+  vectstr.StringQuickshortExeDesc;
+end;
+
+procedure TForm2.StringquickshortAscendente1Click(Sender: TObject);
+begin
+  vectstr.StringQuickshortExeAsc;
 end;
 
 procedure TForm2.VectoresString2Click(Sender: TObject);

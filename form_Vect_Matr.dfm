@@ -97,7 +97,7 @@ object Form2: TForm2
     Top = 264
     Width = 815
     Height = 65
-    ColCount = 6
+    ColCount = 9
     DefaultColWidth = 90
     DefaultRowHeight = 40
     FixedColor = clWhite
@@ -257,6 +257,18 @@ object Form2: TForm2
       object N4Contarcuantasvecesserepiteunelem1: TMenuItem
         Caption = '4 Contar cuantas veces se repite un elem'
         OnClick = N4Contarcuantasvecesserepiteunelem1Click
+      end
+      object Stringquickshort1: TMenuItem
+        Caption = 'String quick short Descendente'
+        OnClick = Stringquickshort1Click
+      end
+      object StringquickshortAscendente1: TMenuItem
+        Caption = 'String quick short Ascendente'
+        OnClick = StringquickshortAscendente1Click
+      end
+      object ModeloExamen71: TMenuItem
+        Caption = 'Modelo Examen 7'
+        OnClick = ModeloExamen71Click
       end
     end
   end

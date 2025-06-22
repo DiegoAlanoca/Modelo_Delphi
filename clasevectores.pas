@@ -4,9 +4,11 @@ interface
 uses sysutils,dialogs;
 const MaxE=1024;
 voc:set of Char=['A','E','I','O','U','a','e','i','o','u'];
+separadores:Set of Char=[' ','-','_'];
 type
   vectrealaux=Array of Real;       //Empieza en 0
-
+  VectStrAux=Array[1..MaxE] of String;
+  VectChar=Array[1..150] of Char;
 type
   vectorescadenas = class
   private
@@ -20,7 +22,20 @@ type
     Function modelexam3:Word;
     function modeloexam4 (e:String):Word;
     function RepetNpal (s,e:String):Word;
+    procedure StringQuickshortExeAsc;
+    procedure StringQuickshortExeDesc;
+    procedure StringQuicksortDesc(izq,der:Integer);
+    procedure StringquicksortAsc(izq,der:Integer);
+    procedure ModeloExam7;
+    procedure SeparSubVecEspac(StrEntr: String;var VectEntr:VectStrAux;
+    var DimEntr:Integer);
+    procedure registrar(VectaReg:VectStrAux;DimenAReg:Word);
+
+    procedure StrinIntercam(p1,p2:Word);
+    function GetFirstCharOfVect(pos:Word):Char;
+    procedure DelElem(pos:Word);
   end;
+{$REGION 'Vectores Clase'}
 type
   vectores = class
   private
@@ -55,11 +70,12 @@ type
     procedure intercambporRefer(var p1,p2:Word;var vectEntra:vectrealaux);
     procedure registrarVectReal(VectEntr:vectrealaux);
 end;
+{$ENDREGION}
 
 implementation
 
 { vectores }
-
+{$REGION 'Vectores Implementacion'}
 
 procedure vectores.addend(numr: Real);
 begin
@@ -359,33 +375,22 @@ var
 begin
   i := izq;
   j := der;
-  // Se toma como pivote el elemento central del sub-vector
   pivote := vect[(izq + der) div 2];
-
   repeat
-    // Busca un elemento a la izquierda mayor o igual que el pivote
     while vect[i] < pivote do i := i + 1;
-    // Busca un elemento a la derecha menor o igual que el pivote
     while vect[j] > pivote do j := j - 1;
-
     if i <= j then
     begin
-      // Intercambia los elementos encontrados
       intercamb(i,j);
-      // Avanza los índices
       i := i + 1;
       j := j - 1;
     end;
   until i > j;
-
-  // Llama recursivamente para los sub-vectores si es necesario
   if izq < j then
     QuickSort(izq, j);
   if i < der then
     QuickSort(i, der);
 end;
-
-
 
 procedure vectores.registrarVectReal(VectEntr: vectrealaux);
 var I:Word;
@@ -414,6 +419,7 @@ begin
   end;
   Result := True;
 end;
+{$ENDREGION}
 
 { vectorescadenas }
 
@@ -428,12 +434,28 @@ begin
   dimensioncad:=0;
 end;
 
+procedure vectorescadenas.DelElem(pos: Word);
+var I: Word;
+begin
+  for I := pos to dimensioncad-1 do
+    vectcad[I]:=vectcad[I+1];
+  vectcad[dimensioncad]:=#0;
+  Dec(dimensioncad);
+end;
+
 procedure vectorescadenas.emptyvec;
 var I:Word;
 begin
   dimensioncad:=0;
   for I := 1 to MaxE do
     vectcad[I]:=#0;
+end;
+
+function vectorescadenas.GetFirstCharOfVect(pos: Word): Char;
+var aux:String;
+begin
+  aux:=vectcad[pos];
+  result:=aux[1];
 end;
 
 function vectorescadenas.modelexam3: Word;
@@ -450,7 +472,6 @@ begin
   result:=contad;
 end;
 
-
 function vectorescadenas.modeloexam4(e: String): Word;
 var I,rep: Integer; aux:String;
 begin
@@ -461,6 +482,34 @@ begin
     rep:=rep+RepetNpal(aux,e);
   end;
   result:=rep;
+end;
+
+procedure vectorescadenas.ModeloExam7;
+var I,dimensionVecFin: Integer;
+    VectStrFinal: VectStrAux;
+begin
+  dimensionVecFin:=0;
+  for I := 1 to dimensioncad do
+   SeparSubVecEspac(vectcad[I],VectStrFinal,dimensionVecFin);
+  registrar(VectStrFinal,dimensionVecFin);
+  StringQuickshortExeDesc;
+  I:=1;
+  while I<=dimensioncad do
+  begin
+    if vectcad[I]=vectcad[I+1] then
+      DelElem(I+1);
+    Inc(I);
+  end;
+
+end;
+
+procedure vectorescadenas.registrar(VectaReg: VectStrAux; DimenAReg: Word);
+var I:Integer;
+begin
+  emptyvec;
+  for I := 1 to DimenAReg do
+    vectcad[I]:=VectaReg[I];
+  dimensioncad:=DimenAReg;
 end;
 
 function vectorescadenas.RepetNpal(s, e: String): Word;
@@ -477,6 +526,102 @@ begin
       Inc(cant);
   end;
   result:=cant;
+end;
+
+procedure vectorescadenas.SeparSubVecEspac
+(StrEntr: String;var VectEntr:VectStrAux;var DimEntr:Integer);
+
+var StrAux:String; I:Integer;
+begin
+  I:=1; StrAux:='';
+  while I<=length(StrEntr) do
+  begin
+    if not(StrEntr[I] in separadores)and(I<=length(StrEntr)) then
+    begin
+      StrAux:=StrAux+StrEntr[I];
+    end
+    else
+    begin
+      Inc(DimEntr);
+      VectEntr[DimEntr]:=StrAux;
+      StrAux:='';
+    end;
+    Inc(I);
+  end;
+  if StrAux<>'' then
+  begin
+    Inc(DimEntr);
+    VectEntr[DimEntr]:=StrAux;
+  end;
+end;
+
+procedure vectorescadenas.StringQuickshortExeAsc;
+begin
+  if dimensioncad > 1 then
+    StringquicksortAsc(1, dimensioncad);
+end;
+
+procedure vectorescadenas.StringQuickshortExeDesc;
+begin
+  if dimensioncad > 1 then
+    StringQuicksortDesc(1, dimensioncad);
+end;
+
+procedure vectorescadenas.StringquicksortAsc(izq,der:Integer);
+var
+  i, j: Integer;
+  pivote: String;
+begin
+  i := izq;
+  j := der;
+  pivote := Uppercase(vectcad[(izq + der) div 2]);
+
+  repeat
+    while Uppercase(vectcad[i]) < pivote do i := i + 1;
+    while Uppercase(vectcad[j]) > pivote do j := j - 1;
+
+    if i <= j then
+    begin
+      StrinIntercam(i, j);
+      i := i + 1;
+      j := j - 1;
+    end;
+  until i > j;
+
+  if izq < j then StringquicksortAsc(izq, j);
+  if i < der then StringquicksortAsc(i, der);
+end;
+
+procedure vectorescadenas.StringQuicksortDesc(izq, der: Integer);
+var
+  i, j: Integer;
+  pivote: String;
+begin
+  i := izq;
+  j := der;
+  pivote := Uppercase(vectcad[(izq + der) div 2]);
+  repeat
+    while Uppercase(vectcad[i]) > pivote do i := i + 1;
+    while Uppercase(vectcad[j]) < pivote do j := j - 1;
+
+    if i <= j then
+    begin
+      StrinIntercam(i, j);
+      i := i + 1;
+      j := j - 1;
+    end;
+  until i > j;
+
+  if izq < j then StringQuicksortDesc(izq, j);
+  if i < der then StringQuicksortDesc(i, der);
+end;
+
+procedure vectorescadenas.StrinIntercam(p1, p2: Word);
+var aux:String;
+begin
+  aux:=vectcad[p1];
+  vectcad[p1]:=vectcad[p2];
+  vectcad[p2]:=aux;
 end;
 
 end.
