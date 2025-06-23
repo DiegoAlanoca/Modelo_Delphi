@@ -9,6 +9,8 @@ type
   vectrealaux=Array of Real;       //Empieza en 0
   VectStrAux=Array[1..MaxE] of String;
   VectChar=Array[1..MaxC] of Char;
+
+{$REGION 'Vectores Cadenas Clase'}
 type
   vectorescadenas = class
   private
@@ -35,6 +37,8 @@ type
     procedure ModeloExam9;
     function CheckMore2Voc(StrToCheck:String):Boolean;
     procedure DelVocRepCharGlob;
+    procedure RegistrCharPosIVect;
+    function ModeloGoogle1:String;
 
     procedure RegistStrEnVectChar(s:string);
     procedure DelElemCharGlob(pos:Integer);
@@ -43,7 +47,9 @@ type
     procedure DelElem(pos:Word);
   end;
 
-{$REGION 'Vectores Clase'}
+{$ENDREGION}
+
+{$REGION 'Vectores Reales Clase'}
 type
   vectores = class
   private
@@ -83,7 +89,7 @@ end;
 implementation
 
 { vectores }
-{$REGION 'Vectores Implementacion'}
+{$REGION 'Vectores Reales Implementacion'}
 
 procedure vectores.addend(numr: Real);
 begin
@@ -430,7 +436,7 @@ end;
 {$ENDREGION}
 
 { vectorescadenas }
-{$REGION 'Vectores Cadenas'}
+{$REGION 'Vectores Cadenas Implementacion'}
 
 {$REGION 'Vectores Cadenas Anteriores'}
 
@@ -688,6 +694,13 @@ begin
 
 end;
 
+procedure vectorescadenas.RegistrCharPosIVect;
+var I:Integer;
+begin
+  I:=StrToInt(InputBox('Posicion','Posicion',''));
+  RegistStrEnVectChar(vectcad[I]);
+end;
+
 procedure vectorescadenas.RegistStrEnVectChar(s: string);
 var
   I: Integer;
@@ -707,6 +720,37 @@ begin
     VectChar[I]:=VectChar[I+1];
   Dec(DimenChar);
 end;
+
+function vectorescadenas.ModeloGoogle1: String;
+var StrResult:String;
+  I,J: Integer;
+begin
+  StrResult:='';
+  for I:=1 to dimensioncad do
+  begin
+    RegistStrEnVectChar(vectcad[I]);
+    if DimenChar>1 then
+    begin
+      if DimenChar mod 2=0 then
+      begin
+        for J:=1 to 2 do
+          StrResult:=StrResult+VectChar[J];
+        StrResult:=StrResult+'-';
+      end
+      else
+      begin
+        for J:=DimenChar-1 to DimenChar do
+          StrResult:=StrResult+VectChar[J];
+        StrResult:=StrResult+'-';
+      end;
+    end
+    else
+      StrResult:=StrResult+Vectcad[I]+'-';
+  end;
+  Delete(StrResult,length(StrResult),1);
+  result:=StrResult;
+end;
+
 {$ENDREGION}
 
 

@@ -237,6 +237,49 @@ object Form2: TForm2
         OnClick = N6ordenarprimosynoprimos1Click
       end
     end
+    object VectoresString1: TMenuItem
+      Caption = 'Vectores String'
+      object Registrar2: TMenuItem
+        Caption = 'Registrar'
+        OnClick = Registrar2Click
+      end
+      object Registrar3: TMenuItem
+        Caption = 'Mostrar'
+        OnClick = Registrar3Click
+      end
+      object MostrarvectorCarPos1: TMenuItem
+        Caption = 'Mostrar vector Char Pos'
+        OnClick = MostrarvectorCarPos1Click
+      end
+      object VectoresString2: TMenuItem
+        Caption = '3 Contar cuantos terminan y comienzan vocal'
+        OnClick = VectoresString2Click
+      end
+      object N4Contarcuantasvecesserepiteunelem1: TMenuItem
+        Caption = '4 Contar cuantas veces se repite un elem'
+        OnClick = N4Contarcuantasvecesserepiteunelem1Click
+      end
+      object Stringquickshort1: TMenuItem
+        Caption = 'String quick short Descendente'
+        OnClick = Stringquickshort1Click
+      end
+      object StringquickshortAscendente1: TMenuItem
+        Caption = 'String quick short Ascendente'
+        OnClick = StringquickshortAscendente1Click
+      end
+      object ModeloExamen71: TMenuItem
+        Caption = 'Modelo Examen 7'
+        OnClick = ModeloExamen71Click
+      end
+      object ModeloExamen91: TMenuItem
+        Caption = 'Modelo Examen 9 Incompleto'
+        OnClick = ModeloExamen91Click
+      end
+      object ModeloGoogle11: TMenuItem
+        Caption = 'Modelo Google 1'
+        OnClick = ModeloGoogle11Click
+      end
+    end
     object Matrices1: TMenuItem
       Caption = 'Matrices Reales'
       object Registrar4: TMenuItem
@@ -286,41 +329,6 @@ object Form2: TForm2
       object Modelo41: TMenuItem
         Caption = 'Modelo 4'
         OnClick = Modelo41Click
-      end
-    end
-    object VectoresString1: TMenuItem
-      Caption = 'Vectores String'
-      object Registrar2: TMenuItem
-        Caption = 'Registrar'
-        OnClick = Registrar2Click
-      end
-      object Registrar3: TMenuItem
-        Caption = 'Mostrar'
-        OnClick = Registrar3Click
-      end
-      object VectoresString2: TMenuItem
-        Caption = '3 Contar cuantos terminan y comienzan vocal'
-        OnClick = VectoresString2Click
-      end
-      object N4Contarcuantasvecesserepiteunelem1: TMenuItem
-        Caption = '4 Contar cuantas veces se repite un elem'
-        OnClick = N4Contarcuantasvecesserepiteunelem1Click
-      end
-      object Stringquickshort1: TMenuItem
-        Caption = 'String quick short Descendente'
-        OnClick = Stringquickshort1Click
-      end
-      object StringquickshortAscendente1: TMenuItem
-        Caption = 'String quick short Ascendente'
-        OnClick = StringquickshortAscendente1Click
-      end
-      object ModeloExamen71: TMenuItem
-        Caption = 'Modelo Examen 7'
-        OnClick = ModeloExamen71Click
-      end
-      object ModeloExamen91: TMenuItem
-        Caption = 'Modelo Examen 9 Incompleto'
-        OnClick = ModeloExamen91Click
       end
     end
     object MatricesChar1: TMenuItem

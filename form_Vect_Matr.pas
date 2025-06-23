@@ -65,6 +65,8 @@ type
     MostrarMatriz1: TMenuItem;
     Modelo5Elem1: TMenuItem;
     Modelo61: TMenuItem;
+    ModeloGoogle11: TMenuItem;
+    MostrarvectorCarPos1: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -110,6 +112,8 @@ type
     procedure Registrar5Click(Sender: TObject);
     procedure MostrarMatriz1Click(Sender: TObject);
     procedure Modelo5Elem1Click(Sender: TObject);
+    procedure ModeloGoogle11Click(Sender: TObject);
+    procedure MostrarvectorCarPos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -219,6 +223,11 @@ begin
   vectstr.ModeloExam9;
 end;
 
+procedure TForm2.ModeloGoogle11Click(Sender: TObject);
+begin
+  Resultado.Caption:=Vectstr.ModeloGoogle1;
+end;
+
 procedure TForm2.ModificarelementoPosEle1Click(Sender: TObject);
 begin
   vectr.modelem(StrToInt(posicion.text),StrToFloat(elemento.text));
@@ -267,6 +276,25 @@ begin
   while (I<=vectorstr.ColCount-1)and(I+1<=vectr.dimension) do
   begin
     vectorstr.Cells[I,0]:=FloatToStr(vectr.vect[I+1]);
+    Inc(I);
+  end;
+
+end;
+
+procedure TForm2.MostrarvectorCarPos1Click(Sender: TObject);
+var I:Integer;
+begin
+  VectStr.RegistrCharPosIVect;
+  I:=0;
+  while (I<=vectorstr.ColCount-1)and(I+1<=vectstr.DimenChar) do
+  begin
+    vectorstr.Cells[I,0]:='';
+    Inc(I);
+  end;
+  I:=0;
+  while (I<=vectorstr.ColCount-1)and(I+1<=vectstr.DimenChar) do
+  begin
+    vectorstr.Cells[I,0]:=vectstr.VectChar[I+1];
     Inc(I);
   end;
 
