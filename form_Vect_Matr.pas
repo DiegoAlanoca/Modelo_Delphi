@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,clasevectores, Vcl.Menus, Vcl.StdCtrls,
-  Vcl.Grids, Vcl.Buttons;
+  Vcl.Grids, Vcl.Buttons,ClaseMatrices;
 
 type
   TForm2 = class(TForm)
@@ -47,6 +47,19 @@ type
     Stringquickshort1: TMenuItem;
     StringquickshortAscendente1: TMenuItem;
     ModeloExamen71: TMenuItem;
+    ModeloExamen91: TMenuItem;
+    Registrar4: TMenuItem;
+    Mostrar1: TMenuItem;
+    MostrarFilas1: TMenuItem;
+    MostrarColumnas1: TMenuItem;
+    MostrarColumnas2: TMenuItem;
+    EliminarColumnasPos1: TMenuItem;
+    InsertarFilaPos1: TMenuItem;
+    InsertarFilaPos2: TMenuItem;
+    Modelo11: TMenuItem;
+    Modelo21: TMenuItem;
+    Modelo31: TMenuItem;
+    Modelo41: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -76,6 +89,19 @@ type
     procedure Stringquickshort1Click(Sender: TObject);
     procedure StringquickshortAscendente1Click(Sender: TObject);
     procedure ModeloExamen71Click(Sender: TObject);
+    procedure ModeloExamen91Click(Sender: TObject);
+    procedure Registrar4Click(Sender: TObject);
+    procedure Mostrar1Click(Sender: TObject);
+    procedure MostrarFilas1Click(Sender: TObject);
+    procedure MostrarColumnas1Click(Sender: TObject);
+    procedure MostrarColumnas2Click(Sender: TObject);
+    procedure EliminarColumnasPos1Click(Sender: TObject);
+    procedure InsertarFilaPos1Click(Sender: TObject);
+    procedure InsertarFilaPos2Click(Sender: TObject);
+    procedure Modelo11Click(Sender: TObject);
+    procedure Modelo21Click(Sender: TObject);
+    procedure Modelo31Click(Sender: TObject);
+    procedure Modelo41Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +112,7 @@ var
   Form2: TForm2;
   vectr : vectores; //Comienza en 0 stringrid[Columna,Fila];
   vectstr : vectorescadenas;
+  m:Matriz;
 implementation
 
 {$R *.dfm}
@@ -110,6 +137,11 @@ begin
   resultado.Caption:=IntToStr(vectr.busquedasec(StrToFloat(elemento.Text)));
 end;
 
+procedure TForm2.EliminarColumnasPos1Click(Sender: TObject);
+begin
+  M.delColumna((StrToInt(posicion.Text)));
+end;
+
 procedure TForm2.EliminarnElementoPosicion1Click(Sender: TObject);
 begin
   vectr.delelem(StrToInt(posicion.Text));
@@ -119,6 +151,7 @@ procedure TForm2.FormCreate(Sender: TObject);
 begin
   vectr:=vectores.Create;
   vectstr:=vectorescadenas.create;
+  m:=Matriz.create;
 end;
 
 procedure TForm2.InsertarElemenPos2Click(Sender: TObject);
@@ -126,9 +159,39 @@ begin
   vectr.InsElemVect(StrToFloat(elemento.Text),StrToInt(posicion.Text));
 end;
 
+procedure TForm2.InsertarFilaPos1Click(Sender: TObject);
+begin
+  M.insFila((StrToInt(posicion.Text)));
+end;
+
+procedure TForm2.InsertarFilaPos2Click(Sender: TObject);
+begin
+  M.insColumna((StrToInt(posicion.Text)));
+end;
+
 procedure TForm2.MergeSort1Click(Sender: TObject);
 begin
   vectr.mergesortexe;
+end;
+
+procedure TForm2.Modelo11Click(Sender: TObject);
+begin
+  resultado.Caption:=FloatToStr(M.ModelExam1);
+end;
+
+procedure TForm2.Modelo21Click(Sender: TObject);
+begin
+  M.ModelExam2;
+end;
+
+procedure TForm2.Modelo31Click(Sender: TObject);
+begin
+  Resultado.Caption:=IntToStr(M.ModeloExam3);
+end;
+
+procedure TForm2.Modelo41Click(Sender: TObject);
+begin
+  Resultado.Caption:=FloatToStr(M.ModeloExam4);
 end;
 
 procedure TForm2.ModeloExamen71Click(Sender: TObject);
@@ -136,9 +199,39 @@ begin
   vectstr.ModeloExam7;
 end;
 
+procedure TForm2.ModeloExamen91Click(Sender: TObject);
+begin
+  vectstr.ModeloExam9;
+end;
+
 procedure TForm2.ModificarelementoPosEle1Click(Sender: TObject);
 begin
   vectr.modelem(StrToInt(posicion.text),StrToFloat(elemento.text));
+end;
+
+procedure TForm2.Mostrar1Click(Sender: TObject);
+var I,J: Integer;
+begin
+  StringGridMatr.RowCount:=M.Filas;
+  StringGridMatr.ColCount:=M.Columnas;
+  for I := 1 to M.Filas do
+    for J := 1 to M.Columnas do
+      StringGridMatr.Cells[J-1,I-1]:=FloatToStr(M.getValue(I,J));
+end;
+
+procedure TForm2.MostrarColumnas1Click(Sender: TObject);
+begin
+  Resultado.Caption:=IntToStr(M.Columnas);
+end;
+
+procedure TForm2.MostrarColumnas2Click(Sender: TObject);
+begin
+  M.delFila(StrToInt(posicion.Text));
+end;
+
+procedure TForm2.MostrarFilas1Click(Sender: TObject);
+begin
+  Resultado.caption:=IntToStr(m.Filas);
 end;
 
 procedure TForm2.Mostrartodo1Click(Sender: TObject);
@@ -210,6 +303,15 @@ begin
     vectorstr.Cells[I,0]:=vectstr.vectcad[I+1];
     Inc(I);
   end;
+end;
+
+procedure TForm2.Registrar4Click(Sender: TObject);
+var I,J: Integer;
+begin
+     M.reDimensionar(StringGridMatr.RowCount,StringGridMatr.ColCount);
+     for I := 1 to M.Filas do
+        for J := 1 to M.Columnas do
+            M.setValue(I,J,StrToFloat(StringGridMatr.Cells[J-1,I-1]));
 end;
 
 procedure TForm2.ScrollBar1Change(Sender: TObject);

@@ -2,20 +2,22 @@ unit clasevectores;
 
 interface
 uses sysutils,dialogs;
-const MaxE=1024;
+const MaxE=1024; MaxC=150;
 voc:set of Char=['A','E','I','O','U','a','e','i','o','u'];
 separadores:Set of Char=[' ','-','_'];
 type
   vectrealaux=Array of Real;       //Empieza en 0
   VectStrAux=Array[1..MaxE] of String;
-  VectChar=Array[1..150] of Char;
+  VectChar=Array[1..MaxC] of Char;
 type
   vectorescadenas = class
   private
 
   public
     vectcad:Array[1..MaxE] of string;
+    VectChar:Array[1..150] of Char;
     dimensioncad:Word;
+    DimenChar:Word;
     constructor create;
     procedure addendelem(e:String);
     procedure emptyvec;
@@ -30,11 +32,17 @@ type
     procedure SeparSubVecEspac(StrEntr: String;var VectEntr:VectStrAux;
     var DimEntr:Integer);
     procedure registrar(VectaReg:VectStrAux;DimenAReg:Word);
+    procedure ModeloExam9;
+    function CheckMore2Voc(StrToCheck:String):Boolean;
+    procedure DelVocRepCharGlob;
 
+    procedure RegistStrEnVectChar(s:string);
+    procedure DelElemCharGlob(pos:Integer);
     procedure StrinIntercam(p1,p2:Word);
     function GetFirstCharOfVect(pos:Word):Char;
     procedure DelElem(pos:Word);
   end;
+
 {$REGION 'Vectores Clase'}
 type
   vectores = class
@@ -422,6 +430,9 @@ end;
 {$ENDREGION}
 
 { vectorescadenas }
+{$REGION 'Vectores Cadenas'}
+
+{$REGION 'Vectores Cadenas Anteriores'}
 
 procedure vectorescadenas.addendelem(e:String);
 begin
@@ -623,5 +634,85 @@ begin
   vectcad[p1]:=vectcad[p2];
   vectcad[p2]:=aux;
 end;
+
+procedure vectorescadenas.ModeloExam9;
+var I:Integer;
+begin
+  I:=1;
+  while I<=dimensioncad do
+    if CheckMore2Voc(vectcad[I])=True then DelElem(I)
+    else Inc(I);
+
+end;
+
+function vectorescadenas.CheckMore2Voc(StrToCheck: String): Boolean;
+var I,J,contadorVocalesUnicas,ContVoc: Integer;
+  vocalesEncontradas: set of Char;
+  ch:Char;
+begin
+  RegistStrEnVectChar(StrToCheck);
+  DelVocRepCharGlob;
+  I:=0; ContVoc:=0;
+  repeat
+    Inc(I);
+  until (VectChar[I] in voc);
+
+  for J:=I+1 to DimenChar do
+    if (VectChar[I]<>VectChar[J])and(VectChar[J] in voc) then
+      Inc(ContVoc);
+  if ContVoc>2 then
+    result:=True
+  else
+    result:=False;
+
+  vocalesEncontradas := [];
+  contadorVocalesUnicas := 0;
+end;
+
+procedure vectorescadenas.DelVocRepCharGlob;
+var I,J:Integer;
+begin
+  I:=0;
+  while I<DimenChar do
+  begin
+    repeat
+      Inc(I);
+    until (VectChar[I] in voc);
+    J:=I;
+    repeat
+      Inc(J);
+    until (Upcase(VectChar[I])=Upcase(VectChar[J]))and(J<=DimenChar);
+    if Upcase(VectChar[I])=Upcase(VectChar[J]) then
+      DelElemCharGlob(I);
+  end;
+
+end;
+
+procedure vectorescadenas.RegistStrEnVectChar(s: string);
+var
+  I: Integer;
+begin
+  for I := 1 to MaxC do
+    VectChar[I]:=#0;
+  for I:=1 to length(s) do
+    VectChar[I]:=s[I];
+  DimenChar:=length(s);
+end;
+
+procedure vectorescadenas.DelElemCharGlob(pos: Integer);
+var
+  I: Integer;
+begin
+  for I := pos to DimenChar-1 do
+    VectChar[I]:=VectChar[I+1];
+  Dec(DimenChar);
+end;
+{$ENDREGION}
+
+
+{$ENDREGION}
+
+//{$REGION 'Vectores'}
+//{$ENDREGION}
 
 end.

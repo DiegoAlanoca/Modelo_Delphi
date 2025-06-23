@@ -8,7 +8,8 @@ uses
   clasevectores in 'clasevectores.pas',
   formalum in 'formalum.pas' {formalumnos},
   clasevectnotas in 'clasevectnotas.pas',
-  form_Vect_Matr in 'form_Vect_Matr.pas' {Form2};
+  form_Vect_Matr in 'form_Vect_Matr.pas' {Form2},
+  ClaseMatrices in 'ClaseMatrices.pas';
 
 {$R *.res}
 

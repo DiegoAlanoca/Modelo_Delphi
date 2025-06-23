@@ -138,12 +138,12 @@ object Form2: TForm2
     Top = 384
     Width = 815
     Height = 331
-    ColCount = 1
+    ColCount = 4
     DefaultColWidth = 90
     DefaultRowHeight = 40
     FixedColor = clWhite
     FixedCols = 0
-    RowCount = 1
+    RowCount = 4
     FixedRows = 0
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -239,6 +239,54 @@ object Form2: TForm2
     end
     object Matrices1: TMenuItem
       Caption = 'Matrices'
+      object Registrar4: TMenuItem
+        Caption = 'Registrar'
+        OnClick = Registrar4Click
+      end
+      object Mostrar1: TMenuItem
+        Caption = 'Mostrar Matriz'
+        OnClick = Mostrar1Click
+      end
+      object MostrarFilas1: TMenuItem
+        Caption = 'Mostrar Filas'
+        OnClick = MostrarFilas1Click
+      end
+      object MostrarColumnas1: TMenuItem
+        Caption = 'Mostrar Columnas'
+        OnClick = MostrarColumnas1Click
+      end
+      object MostrarColumnas2: TMenuItem
+        Caption = 'Eliminar Fila Pos'
+        OnClick = MostrarColumnas2Click
+      end
+      object EliminarColumnasPos1: TMenuItem
+        Caption = 'Eliminar Columnas Pos'
+        OnClick = EliminarColumnasPos1Click
+      end
+      object InsertarFilaPos1: TMenuItem
+        Caption = 'Insertar Fila Pos'
+        OnClick = InsertarFilaPos1Click
+      end
+      object InsertarFilaPos2: TMenuItem
+        Caption = 'Insertar Columna Pos'
+        OnClick = InsertarFilaPos2Click
+      end
+      object Modelo11: TMenuItem
+        Caption = 'Modelo 1'
+        OnClick = Modelo11Click
+      end
+      object Modelo21: TMenuItem
+        Caption = 'Modelo 2'
+        OnClick = Modelo21Click
+      end
+      object Modelo31: TMenuItem
+        Caption = 'Modelo 3'
+        OnClick = Modelo31Click
+      end
+      object Modelo41: TMenuItem
+        Caption = 'Modelo 4'
+        OnClick = Modelo41Click
+      end
     end
     object VectoresString1: TMenuItem
       Caption = 'Vectores String'
@@ -269,6 +317,10 @@ object Form2: TForm2
       object ModeloExamen71: TMenuItem
         Caption = 'Modelo Examen 7'
         OnClick = ModeloExamen71Click
+      end
+      object ModeloExamen91: TMenuItem
+        Caption = 'Modelo Examen 9 Incompleto'
+        OnClick = ModeloExamen91Click
       end
     end
   end
