@@ -7,6 +7,22 @@ Uses SysUtils,dialogs,Math;
 Const
     MaxF=128;
     MaxC=128;
+//{$REGION 'Vectores'}
+//{$ENDREGION}
+type
+  MatrizChar=Class
+    Private
+      NroFilas,NroColumnas:Word;
+       Celdas: Array[1..MaxF,1..MaxC] of Char;
+    Public
+      function Filas:Word;
+      function Columnas:Word;
+      Procedure setValue(F,C:Word;V:Char);
+      Procedure reDimensionar(Nf,Nc:Word);
+      function getValue(F,C:Word):Char;
+      function ModeloExam5(StrToCheck:String):String;
+
+  End;
 Type
     Matriz = Class
       Private
@@ -30,6 +46,7 @@ Type
         function BinarioaDecim(BinarioStr:String):Integer;
         function ModeloExam3:Integer;
         function ModeloExam4:Real;
+        procedure MoedoloExam6;
     End;
 
 implementation
@@ -258,5 +275,106 @@ end;
 
 {$ENDREGION}
 
+procedure Matriz.MoedoloExam6;
+var LimVer,LimHorz,Num1,Num2,I,J:Word;
+begin
+  LimHorz:=0; Limver:=1;
+  Num1:=1; Num2:=2;
+  while (LimHorz<=Columnas div 2)or(Limver<=Filas div 2) do
+  begin
+
+  end;
+
+end;
+
+
+
+function MatrizChar.Columnas: Word;
+begin
+  Result:=NroColumnas;
+end;
+
+function MatrizChar.Filas: Word;
+begin
+  Result:=NroFilas;
+end;
+
+function MatrizChar.getValue(F, C: Word): Char;
+begin
+  result:=Celdas[F,C];
+end;
+
+function MatrizChar.ModeloExam5(StrToCheck:String): String;
+var StrTemp:String; I,J: Integer;
+begin
+  for I:=1 to NroFilas do
+  begin
+    StrTemp:='';
+    for J:=1 to NroColumnas do
+    begin
+      StrTemp:=StrTemp+Celdas[I,J];
+      if Uppercase(StrTemp)=Uppercase(StrToCheck) then
+      begin
+        Result:='Si se encuentra';
+        Exit;
+      end;
+    end;
+  end;
+
+  for I:=1 to NroFilas do
+  begin
+    StrTemp:='';
+    for J:=NroColumnas downto 1 do
+    begin
+      StrTemp:=StrTemp+Celdas[I,J];
+      if Uppercase(StrTemp)=Uppercase(StrToCheck) then
+      begin
+        Result:='Si se encuentra';
+        Exit;
+      end;
+    end;
+  end;
+
+  for I:=1 to NroColumnas do
+  begin
+    StrTemp:='';
+    for J:=1 to NroFilas do
+    begin
+      StrTemp:=StrTemp+Celdas[J,I];
+      if Uppercase(StrTemp)=Uppercase(StrToCheck) then
+      begin
+        Result:='Si se encuentra';
+        Exit;
+      end;
+    end;
+  end;
+
+  for I:=NroColumnas downto 1 do
+  begin
+    StrTemp:='';
+    for J:=Filas downto 1 do
+    begin
+      StrTemp:=StrTemp+Celdas[J,I];
+      if Uppercase(StrTemp)=Uppercase(StrToCheck) then
+      begin
+        Result:='Si se encuentra';
+        Exit;
+      end;
+    end;
+  end;
+  Result:='No se encuentra en la Matriz';
+end;
+
+procedure MatrizChar.reDimensionar(Nf, Nc: Word);
+begin
+   NroFilas:=Nf;NroColumnas:=Nc;
+end;
+
+procedure MatrizChar.setValue(F, C: Word; V: Char);
+begin
+  if (F>0)And(F<=NroFilas)And(C>0)And(C<=NroColumnas) then
+        Celdas[F,C]:=V
+     Else raise Exception.Create('Posicion fuera de rango');
+end;
 
 end.

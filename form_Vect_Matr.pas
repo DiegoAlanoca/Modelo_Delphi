@@ -60,6 +60,11 @@ type
     Modelo21: TMenuItem;
     Modelo31: TMenuItem;
     Modelo41: TMenuItem;
+    MatricesChar1: TMenuItem;
+    Registrar5: TMenuItem;
+    MostrarMatriz1: TMenuItem;
+    Modelo5Elem1: TMenuItem;
+    Modelo61: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
@@ -102,6 +107,9 @@ type
     procedure Modelo21Click(Sender: TObject);
     procedure Modelo31Click(Sender: TObject);
     procedure Modelo41Click(Sender: TObject);
+    procedure Registrar5Click(Sender: TObject);
+    procedure MostrarMatriz1Click(Sender: TObject);
+    procedure Modelo5Elem1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -112,7 +120,8 @@ var
   Form2: TForm2;
   vectr : vectores; //Comienza en 0 stringrid[Columna,Fila];
   vectstr : vectorescadenas;
-  m:Matriz;
+  M:Matriz;
+  MC:MatrizChar;
 implementation
 
 {$R *.dfm}
@@ -151,7 +160,8 @@ procedure TForm2.FormCreate(Sender: TObject);
 begin
   vectr:=vectores.Create;
   vectstr:=vectorescadenas.create;
-  m:=Matriz.create;
+  M:=Matriz.create;
+  MC:=MatrizChar.Create;
 end;
 
 procedure TForm2.InsertarElemenPos2Click(Sender: TObject);
@@ -194,6 +204,11 @@ begin
   Resultado.Caption:=FloatToStr(M.ModeloExam4);
 end;
 
+procedure TForm2.Modelo5Elem1Click(Sender: TObject);
+begin
+  Resultado.Caption:=MC.ModeloExam5(Elemento.Text);
+end;
+
 procedure TForm2.ModeloExamen71Click(Sender: TObject);
 begin
   vectstr.ModeloExam7;
@@ -232,6 +247,16 @@ end;
 procedure TForm2.MostrarFilas1Click(Sender: TObject);
 begin
   Resultado.caption:=IntToStr(m.Filas);
+end;
+
+procedure TForm2.MostrarMatriz1Click(Sender: TObject);
+var I,J: Integer;
+begin
+  StringGridMatr.RowCount:=MC.Filas;
+  StringGridMatr.ColCount:=MC.Columnas;
+  for I := 1 to MC.Filas do
+    for J := 1 to MC.Columnas do
+      StringGridMatr.Cells[J-1,I-1]:=MC.getValue(I,J);
 end;
 
 procedure TForm2.Mostrartodo1Click(Sender: TObject);
@@ -312,6 +337,15 @@ begin
      for I := 1 to M.Filas do
         for J := 1 to M.Columnas do
             M.setValue(I,J,StrToFloat(StringGridMatr.Cells[J-1,I-1]));
+end;
+
+procedure TForm2.Registrar5Click(Sender: TObject);
+var I,J: Integer;
+begin
+     MC.reDimensionar(StringGridMatr.RowCount,StringGridMatr.ColCount);
+     for I := 1 to MC.Filas do
+        for J := 1 to MC.Columnas do
+            MC.setValue(I,J,StringGridMatr.Cells[J-1,I-1][1]);
 end;
 
 procedure TForm2.ScrollBar1Change(Sender: TObject);

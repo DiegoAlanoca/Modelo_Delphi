@@ -238,7 +238,7 @@ object Form2: TForm2
       end
     end
     object Matrices1: TMenuItem
-      Caption = 'Matrices'
+      Caption = 'Matrices Reales'
       object Registrar4: TMenuItem
         Caption = 'Registrar'
         OnClick = Registrar4Click
@@ -321,6 +321,24 @@ object Form2: TForm2
       object ModeloExamen91: TMenuItem
         Caption = 'Modelo Examen 9 Incompleto'
         OnClick = ModeloExamen91Click
+      end
+    end
+    object MatricesChar1: TMenuItem
+      Caption = 'Matrices Char'
+      object Registrar5: TMenuItem
+        Caption = 'Registrar'
+        OnClick = Registrar5Click
+      end
+      object MostrarMatriz1: TMenuItem
+        Caption = 'Mostrar Matriz'
+        OnClick = MostrarMatriz1Click
+      end
+      object Modelo5Elem1: TMenuItem
+        Caption = 'Modelo 5 Elem'
+        OnClick = Modelo5Elem1Click
+      end
+      object Modelo61: TMenuItem
+        Caption = 'Modelo 6 Incompleto'
       end
     end
   end
