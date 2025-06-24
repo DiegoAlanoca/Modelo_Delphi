@@ -67,6 +67,8 @@ type
     Modelo61: TMenuItem;
     ModeloGoogle11: TMenuItem;
     MostrarvectorCarPos1: TMenuItem;
+    ModeloGoogle21: TMenuItem;
+    ContarcuantasVocalestieneSinrepetir1: TMenuItem;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure vectorstrDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);

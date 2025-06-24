@@ -279,6 +279,12 @@ object Form2: TForm2
         Caption = 'Modelo Google 1'
         OnClick = ModeloGoogle11Click
       end
+      object ModeloGoogle21: TMenuItem
+        Caption = 'Modelo Google 2'
+      end
+      object ContarcuantasVocalestieneSinrepetir1: TMenuItem
+        Caption = 'Contar cuantas Vocales tiene (Sin repetir)'
+      end
     end
     object Matrices1: TMenuItem
       Caption = 'Matrices Reales'

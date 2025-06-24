@@ -4,6 +4,7 @@ interface
 uses sysutils,dialogs;
 const MaxE=1024; MaxC=150;
 voc:set of Char=['A','E','I','O','U','a','e','i','o','u'];
+NumNaturales:Set of Char=['1','2','3','4','5','6','7','8','9'];
 separadores:Set of Char=[' ','-','_'];
 type
   vectrealaux=Array of Real;       //Empieza en 0
@@ -39,12 +40,17 @@ type
     procedure DelVocRepCharGlob;
     procedure RegistrCharPosIVect;
     function ModeloGoogle1:String;
+    procedure ModeloGoogle2;
+    function ContMas3Voc(s:String):Boolean;
 
+    procedure InvVectCharGlob;
     procedure RegistStrEnVectChar(s:string);
     procedure DelElemCharGlob(pos:Integer);
     procedure StrinIntercam(p1,p2:Word);
     function GetFirstCharOfVect(pos:Word):Char;
     procedure DelElem(pos:Word);
+
+    function ContarVocales(palabra: string): integer;
   end;
 
 {$ENDREGION}
@@ -171,6 +177,7 @@ begin
   until (vect[I]=e);
   result:=I;
 end;
+
 
 function vectores.ConvStrEnVectRealConComas(s: String): vectrealaux;
 var I, J: Integer;
@@ -753,6 +760,73 @@ end;
 
 {$ENDREGION}
 
+procedure vectorescadenas.ModeloGoogle2;
+var I,J:Integer;
+begin
+  for I:=1 to dimensioncad do
+  begin
+    RegistStrEnVectChar(vectcad[I]);
+    J:=0;
+    repeat
+      Inc(J);
+    until VectChar[J] in NumNaturales;
+    if VectChar[J] in NumNaturales then
+    begin
+      InvVectCharGlob;
+    end;
+  end;
+
+end;
+
+procedure vectorescadenas.InvVectCharGlob;
+var NewStr:String;
+  I: Integer;
+begin
+  NewStr:='';
+  for I:=DimenChar downto 1 do
+    NewStr:=NewStr+VectChar[I];
+end;
+
+function vectorescadenas.ContarVocales(palabra: string): integer;
+var i, contador: Integer;
+begin
+  contador := 0;
+  for i := 1 to Length(palabra) do
+  begin
+    // Incluimos mayúsculas y minúsculas en el conjunto de prueba
+    if palabra[i] in ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'] then
+    begin
+      Inc(contador);
+    end;
+  end;
+  Result := contador;
+end;
+
+function vectorescadenas.ContMas3Voc(s: String): Boolean;
+var  I,J,Numvoc: Integer;
+begin
+  I:=0; Numvoc:=0;
+  while I<=Length(s) do
+  begin
+    Inc(I);
+    if s[I] in voc  then
+    begin
+      Inc(Numvoc); J:=I+1;
+      while J<=length(s) do
+      begin
+        if s[J]=s[I] then
+          Delete(s,J,1);
+        Inc(J);
+      end;
+    end;
+  end;
+
+  if Numvoc>=3 then
+    result:=True
+  else
+    result:=False;
+
+end;
 
 {$ENDREGION}
 
