@@ -236,6 +236,10 @@ object Form2: TForm2
         Caption = '6 ordenar primos y no primos'
         OnClick = N6ordenarprimosynoprimos1Click
       end
+      object Prueba1: TMenuItem
+        Caption = 'Prueba'
+        OnClick = Prueba1Click
+      end
     end
     object VectoresString1: TMenuItem
       Caption = 'Vectores String'

@@ -5,11 +5,13 @@ uses sysutils,dialogs;
 const MaxE=1024; MaxC=150;
 voc:set of Char=['A','E','I','O','U','a','e','i','o','u'];
 NumNaturales:Set of Char=['1','2','3','4','5','6','7','8','9'];
+Num0y9:Set of Char=['0','1','2','3','4','5','6','7','8','9'];
 separadores:Set of Char=[' ','-','_'];
 type
   vectrealaux=Array of Real;       //Empieza en 0
   VectStrAux=Array[1..MaxE] of String;
   VectChar=Array[1..MaxC] of Char;
+  VectNumNatr=array[0..9] of Integer;
 
 {$REGION 'Vectores Cadenas Clase'}
 type
@@ -82,6 +84,8 @@ type
     procedure modelexam6;
     procedure burbujaAscRef(var VectEntr:vectrealaux;var dimEntr:Integer);
     procedure burbujaDscRef(var VectEntr:vectrealaux;var dimEntr:Integer);
+    function ContCantDigNaturales(num:Integer):VectNumNatr;
+    procedure prueba;
 
     function VerificarPrimo(num:Integer):Boolean;
     function ConvStrEnVectRealConComas(s:String):vectrealaux;
@@ -181,6 +185,18 @@ begin
 end;
 
 
+function vectores.ContCantDigNaturales(num: Integer): VectNumNatr;
+var I: Integer; TablaDeFrecuencia:VectNumNatr; aux:Char; numc:String;
+begin
+  numc:=IntToStr(num);
+  for I:=0 to 9 do
+    TablaDeFrecuencia[I]:=0;
+  for I:=1 to length(numc) do
+    if numc[I] in ['0'..'9'] then
+      Inc(TablaDeFrecuencia[StrToInt(numc[I])]);
+  result:=TablaDeFrecuencia;
+end;
+
 function vectores.ConvStrEnVectRealConComas(s: String): vectrealaux;
 var I, J: Integer;
   numStr: String;
@@ -214,10 +230,12 @@ procedure vectores.delelem(p: word);
 var I: Word;
 begin
   if (p>=1)and(p<=Dimension) then
-    for I := p to dimension do
-      vect[I]:=vect[I+1]
+  begin
+    for I := p to dimension-1 do
+      vect[I]:=vect[I+1];
+    Dec(Dimension);
+  end
   else raise Exception.Create('Posicion invalida');
-  Dec(Dimension);
 end;
 
 procedure vectores.emptyvec;
@@ -383,6 +401,16 @@ begin
     result:=vect[pos];
   end
   else raise Exception.Create('Rango no permitido');
+end;
+
+procedure vectores.prueba;
+var I:Integer; v:VectNumNatr;
+begin
+  v:=ContCantDigNaturales(52156);
+  emptyvec;
+  for I:=0 to 9 do
+    addend(v[I]);
+  dimension:=10;
 end;
 
 procedure vectores.quickshortexe;
@@ -760,8 +788,6 @@ begin
   result:=StrResult;
 end;
 
-{$ENDREGION}
-
 procedure vectorescadenas.ModeloGoogle2;
 var I,J:Integer;
 begin
@@ -867,6 +893,11 @@ begin
     end;
   end;
 end;
+
+{$ENDREGION}
+
+
+
 
 {$ENDREGION}
 
