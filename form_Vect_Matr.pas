@@ -116,6 +116,7 @@ type
     procedure Modelo5Elem1Click(Sender: TObject);
     procedure ModeloGoogle11Click(Sender: TObject);
     procedure MostrarvectorCarPos1Click(Sender: TObject);
+    procedure ContarcuantasVocalestieneSinrepetir1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -150,6 +151,11 @@ end;
 procedure TForm2.BusquedaSecuencial1Click(Sender: TObject);
 begin
   resultado.Caption:=IntToStr(vectr.busquedasec(StrToFloat(elemento.Text)));
+end;
+
+procedure TForm2.ContarcuantasVocalestieneSinrepetir1Click(Sender: TObject);
+begin
+  resultado.caption:=IntToStr(vectstr.ContarVocalesUnicas(elemento.Text));
 end;
 
 procedure TForm2.EliminarColumnasPos1Click(Sender: TObject);

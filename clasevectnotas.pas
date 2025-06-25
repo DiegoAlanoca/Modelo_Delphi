@@ -6,90 +6,129 @@ uses
 Const
     MaxE = 1024;
 Type
-    Alumno = Record    //es un registro
-      Registro : Cardinal;
-      Nombre   : String;
-      FechaNac : TDate;
-      Materia  : String;
-      Nota     : Word;
+    Equipos = Record    //es un registro
+      NombreDeEquipo : String;
+      PartidosGanados   : Word;
+      PartidosEmpatados : Word;
+      PartidosPerdidos  : Word;
+      GolesFavor     : Word;
+      GolesContra :Word;
+      DiferenciaDeGoles:Real;
+      Puntos:Integer;
     End;
-    Notas = Class
+
+  Notas = Class
       Private
-         Alumnos : Array[1..MaxE] of Alumno;
+         Equipo : Array[1..MaxE] of Equipos;
       Public
-         NroAlumnos : Word;
+         NroEquipos : Word;
          promedio:Word;
          Function Dim:Word;
-         Function getElement(p:Word):Alumno;
+         Function getElement(p:Word):Equipos;
          Procedure redimensionar(d:Word);
-         Procedure addElement(e:Alumno);
+         Procedure addElement(e:Equipos);
          Procedure delElement(p:Word);
-         Procedure modElement(p:Word;e:Alumno);
-         Procedure insElement(p:Word;e:Alumno);
+         Procedure modElement(p:Word;e:Equipos);
+         Procedure insElement(p:Word;e:Equipos);
 
+         procedure burbujaDsc;
+         procedure intercamb(p1,p2:Word);
+         procedure OrdPuntDiferGol;
     End;
 
 implementation
 
 { Vector }
 
-procedure Notas.addElement(e: Alumno);
+procedure Notas.addElement(e: Equipos);
 begin
-     Inc(NroAlumnos);
-     Alumnos[NroAlumnos]:=e;
-     promedio:=promedio+e.Nota;
+     Inc(NroEquipos);
+     Equipo[NroEquipos]:=e;
+
+     promedio:=promedio+e.GolesFavor;
+end;
+
+procedure Notas.burbujaDsc;
+var I,J: Integer; e1,e2:Equipos;
+begin
+  for I := 1 to NroEquipos-1 do
+    for J := 1 to NroEquipos-I do
+    begin
+      e1:=Equipo[J]; e2:=Equipo[J+1];
+      if e1.Puntos<e2.Puntos then
+        intercamb(J,J+1);
+    end;
 end;
 
 procedure Notas.delElement(p: Word);
 var
   I: Word;
 begin
-     if (p>0) and (p<=NroAlumnos) then
+     if (p>0) and (p<=NroEquipos) then
      Begin
-       for I := p to NroAlumnos-1 do
-          Alumnos[i]:=Alumnos[i+1];
-       Dec(NroAlumnos);
+       for I := p to NroEquipos-1 do
+          Equipo[i]:=Equipo[i+1];
+       Dec(NroEquipos);
      End else raise Exception.Create('Posicion fuer de Rango');
 end;
 
 function Notas.Dim: Word;
 begin
-     Result:=NroAlumnos;
+     Result:=NroEquipos;
 end;
 
-function Notas.getElement(p: Word): Alumno;
+function Notas.getElement(p: Word): Equipos;
 begin
-     if (p>0) and (p<=NroAlumnos) then
+     if (p>0) and (p<=NroEquipos) then
      Begin
-           Result:=Alumnos[p];
+           Result:=Equipo[p];
      End else raise Exception.Create('Posicion fuer de Rango');
 end;
 
-procedure Notas.insElement(p: Word; e: Alumno);
+procedure Notas.insElement(p: Word; e: Equipos);
 var
   I: Word;
 begin
-     if (p>0) and (p<=NroAlumnos) then
+     if (p>0) and (p<=NroEquipos) then
      Begin
-       Inc(NroAlumnos);
-       for I := NroAlumnos Downto p+1 do
-          Alumnos[i]:=Alumnos[i-1];
-       Alumnos[p]:=e;
+       Inc(NroEquipos);
+       for I := NroEquipos Downto p+1 do
+          Equipo[i]:=Equipo[i-1];
+       Equipo[p]:=e;
      End else raise Exception.Create('Posicion fuer de Rango');
 end;
 
-procedure Notas.modElement(p: Word; e: Alumno);
+procedure Notas.intercamb(p1, p2: Word);
+var aux:Equipos;
+begin
+  aux:=Equipo[p1];
+  Equipo[p1]:=Equipo[p2];
+  Equipo[p2]:=aux;
+end;
+
+procedure Notas.modElement(p: Word; e: Equipos);
 
 begin
-     if (p>0) and (p<=NroAlumnos) then
+     if (p>0) and (p<=NroEquipos) then
      Begin
-        Alumnos[p]:=e;
+        Equipo[p]:=e;
      End else raise Exception.Create('Posicion fuer de Rango');
+end;
+
+procedure Notas.OrdPuntDiferGol;
+var I: Integer; e1,e2:Equipos;
+begin
+  for I:=1 to NroEquipos do
+  begin
+    e1:=Equipo[I]; e2:=Equipo[I+1];
+    if (e1.Puntos=e2.Puntos)and(e1.DiferenciaDeGoles<e2.DiferenciaDeGoles) then
+      intercamb(I,I+1);
+  end;
 end;
 
 procedure Notas.redimensionar(d: Word);
 begin
-     NroAlumnos:=d;
+     NroEquipos:=d;
 end;
 
 end.

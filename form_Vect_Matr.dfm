@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 853
-  ClientWidth = 912
+  ClientHeight = 680
+  ClientWidth = 1019
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object Form2: TForm2
   OnCreate = FormCreate
   TextHeight = 15
   object Label1: TLabel
-    Left = 55
-    Top = 60
+    Left = 50
+    Top = 8
     Width = 87
     Height = 32
     Caption = 'Posici'#243'n'
@@ -27,8 +27,8 @@ object Form2: TForm2
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 392
-    Top = 60
+    Left = 387
+    Top = 8
     Width = 101
     Height = 32
     Caption = 'Elemento'
@@ -41,7 +41,7 @@ object Form2: TForm2
   end
   object resultado: TLabel
     Left = 50
-    Top = 744
+    Top = 592
     Width = 104
     Height = 32
     Caption = 'Resultado'
@@ -54,21 +54,21 @@ object Form2: TForm2
   end
   object Label3: TLabel
     Left = 64
-    Top = 224
+    Top = 99
     Width = 58
     Height = 15
     Caption = 'Columna 0'
   end
   object Label4: TLabel
-    Left = 17
-    Top = 264
+    Left = 8
+    Top = 120
     Width = 27
     Height = 15
     Caption = 'Fila 0'
   end
   object posicion: TEdit
-    Left = 55
-    Top = 114
+    Left = 50
+    Top = 46
     Width = 121
     Height = 40
     Font.Charset = DEFAULT_CHARSET
@@ -80,8 +80,8 @@ object Form2: TForm2
     TabOrder = 0
   end
   object elemento: TEdit
-    Left = 392
-    Top = 114
+    Left = 387
+    Top = 46
     Width = 169
     Height = 40
     Font.Charset = DEFAULT_CHARSET
@@ -94,7 +94,7 @@ object Form2: TForm2
   end
   object vectorstr: TStringGrid
     Left = 50
-    Top = 264
+    Top = 120
     Width = 815
     Height = 65
     ColCount = 9
@@ -117,7 +117,7 @@ object Form2: TForm2
   end
   object ScrollBarVect: TScrollBar
     Left = 50
-    Top = 335
+    Top = 191
     Width = 815
     Height = 17
     PageSize = 0
@@ -125,19 +125,19 @@ object Form2: TForm2
     OnChange = ScrollBarVectChange
   end
   object BitBtn1: TBitBtn
-    Left = 17
-    Top = 800
-    Width = 94
-    Height = 33
+    Left = 883
+    Top = 23
+    Width = 120
+    Height = 41
     Kind = bkClose
     NumGlyphs = 2
     TabOrder = 4
   end
   object StringGridMatr: TStringGrid
     Left = 50
-    Top = 384
+    Top = 232
     Width = 815
-    Height = 331
+    Height = 313
     ColCount = 4
     DefaultColWidth = 90
     DefaultRowHeight = 40
@@ -158,7 +158,7 @@ object Form2: TForm2
   end
   object ScrollBarMatr: TScrollBar
     Left = 50
-    Top = 721
+    Top = 551
     Width = 815
     Height = 17
     PageSize = 0
@@ -167,9 +167,9 @@ object Form2: TForm2
   end
   object ScrollBar1: TScrollBar
     Left = 871
-    Top = 384
+    Top = 232
     Width = 17
-    Height = 323
+    Height = 313
     Kind = sbVertical
     PageSize = 0
     TabOrder = 7
@@ -283,7 +283,8 @@ object Form2: TForm2
         Caption = 'Modelo Google 2'
       end
       object ContarcuantasVocalestieneSinrepetir1: TMenuItem
-        Caption = 'Contar cuantas Vocales tiene (Sin repetir)'
+        Caption = 'Contar cuantas Vocales tiene Sin repetir (Elemento)'
+        OnClick = ContarcuantasVocalestieneSinrepetir1Click
       end
     end
     object Matrices1: TMenuItem

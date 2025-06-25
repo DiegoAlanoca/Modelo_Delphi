@@ -41,8 +41,9 @@ type
     procedure RegistrCharPosIVect;
     function ModeloGoogle1:String;
     procedure ModeloGoogle2;
-    function ContMas3Voc(s:String):Boolean;
+    function ContMas3Voc(s:String):Boolean; //No funciona
 
+    function ContVocSinRep(s:String):Word;
     procedure InvVectCharGlob;
     procedure RegistStrEnVectChar(s:string);
     procedure DelElemCharGlob(pos:Integer);
@@ -50,6 +51,7 @@ type
     function GetFirstCharOfVect(pos:Word):Char;
     procedure DelElem(pos:Word);
 
+    function ContarVocalesUnicas(const Texto: string): Integer;
     function ContarVocales(palabra: string): integer;
   end;
 
@@ -802,6 +804,26 @@ begin
   Result := contador;
 end;
 
+function vectorescadenas.ContarVocalesUnicas(const Texto: string): Integer;
+var
+  i: Integer;
+  Caracter: Char;
+  Encontradas: string;
+begin
+  Encontradas := '';
+  for i := 1 to Length(Texto) do
+  begin
+    Caracter := Texto[i];
+    if Caracter in voc then
+    begin
+      Caracter := LowerCase(Caracter)[1];
+      if Pos(Caracter, Encontradas) = 0 then
+        Encontradas := Encontradas + Caracter;
+    end;
+  end;
+  Result := Length(Encontradas);
+end;
+
 function vectorescadenas.ContMas3Voc(s: String): Boolean;
 var  I,J,Numvoc: Integer;
 begin
@@ -826,6 +848,24 @@ begin
   else
     result:=False;
 
+end;
+
+function vectorescadenas.ContVocSinRep(s: String): Word;
+var I,J,VocSinRep:Integer;
+begin
+  I:=0; J:=0; VocSinRep:=0;
+  while I<=length(s) do
+  begin
+    Inc(I);
+    if s[I] in voc then
+      Inc(VocSinRep);
+    while (s[I] in voc)and(J<=length(s)) do
+    begin
+      J:=I+1;
+      if s[I]=s[J] then
+        Delete(s,J,1);
+    end;
+  end;
 end;
 
 {$ENDREGION}
