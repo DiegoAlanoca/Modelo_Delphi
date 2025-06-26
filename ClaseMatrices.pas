@@ -21,7 +21,8 @@ type
       Procedure reDimensionar(Nf,Nc:Word);
       function getValue(F,C:Word):Char;
       function ModeloExam5(StrToCheck:String):String;
-
+      procedure VaciarMatriz;
+      procedure Examen(FilaI, ColumnaI, Direccion: Word;Palabra: String);
   End;
 Type
     Matriz = Class
@@ -287,11 +288,101 @@ begin
 
 end;
 
-
-
 function MatrizChar.Columnas: Word;
 begin
   Result:=NroColumnas;
+end;
+
+procedure MatrizChar.Examen(FilaI, ColumnaI, Direccion: Word;Palabra: String);
+var I,J,K: Word;
+begin
+{  FilaI:=StrToInt(InputBox('Fila Inicial','',''));
+  ColumnaI:=StrToInt(InputBox('Columna Inicial','',''));
+  Direccion:=StrToInt(InputBox('Direccion','',''));
+  Palabra:=InputBox('Palabra','','');
+ }
+  if Direccion=1 then
+  begin
+    I:=FilaI; J:=1;
+    while (I>=1)and(J<=length(Palabra)) do
+    begin
+      Celdas[I,ColumnaI]:=Palabra[J];
+      Dec(I);
+      Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=2 then
+  begin
+    I:=FilaI; J:=1;
+    while (I<=NroFilas)and(J<=length(Palabra)) do
+    begin
+      Celdas[I,ColumnaI]:=Palabra[J];
+      Inc(I);
+      Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=3 then
+  begin
+    I:=ColumnaI; J:=1;
+    while (I<=NroFilas)and(J<=length(Palabra)) do   //Editado
+    begin
+      Celdas[FilaI,I]:=Palabra[J];
+      Inc(I); Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=4 then
+  begin
+    I:=ColumnaI; J:=1;
+    while (I>=1)and(J<=length(Palabra)) do   //Editado
+    begin
+      Celdas[FilaI,I]:=Palabra[J];
+      Dec(I); Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=5 then
+  begin
+    I:=FilaI; K:=ColumnaI; J:=1;
+    while (I>=1)and(K<=NroColumnas)and(J<=length(Palabra)) do //Editado
+    begin
+      Celdas[I,K]:=Palabra[J];
+      Dec(I); Inc(K); Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=6 then
+  begin
+    I:=FilaI; K:=ColumnaI; J:=1;
+    while (I>=1)and(K>=1)and(J<=length(Palabra)) do //Editado
+    begin
+      Celdas[I,K]:=Palabra[J];
+      Dec(I); Dec(K); Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=7 then
+  begin
+    I:=FilaI; K:=ColumnaI; J:=1;
+    while (I<=NroFilas)and(K<=NroColumnas)and(J<=length(Palabra)) do //Editado
+    begin
+      Celdas[I,K]:=Palabra[J];
+      Inc(I); Inc(K); Inc(J);
+    end;
+    Direccion:=0;
+  end;
+  if Direccion=8 then
+  begin
+    I:=FilaI; K:=ColumnaI; J:=1;
+    while (I<=NroFilas)and(K>=1)and(J<=length(Palabra)) do //Editado
+    begin
+      Celdas[I,K]:=Palabra[J];
+      Inc(I); Dec(K); Inc(J);
+    end;
+    Direccion:=0;
+  end;
 end;
 
 function MatrizChar.Filas: Word;
@@ -375,6 +466,16 @@ begin
   if (F>0)And(F<=NroFilas)And(C>0)And(C<=NroColumnas) then
         Celdas[F,C]:=V
      Else raise Exception.Create('Posicion fuera de rango');
+end;
+
+procedure MatrizChar.VaciarMatriz;
+var
+  I: Integer;
+  J: Integer;
+begin
+  for I:=1 to NroFilas do
+    for J := 1 to NroColumnas do
+      Celdas[I,J]:=' ';
 end;
 
 end.

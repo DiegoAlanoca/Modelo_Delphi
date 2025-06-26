@@ -3,7 +3,7 @@ object Form4: TForm4
   Top = 0
   Caption = 'Form4'
   ClientHeight = 637
-  ClientWidth = 1088
+  ClientWidth = 1192
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -163,8 +163,40 @@ object Form4: TForm4
     NumGlyphs = 2
     TabOrder = 7
   end
+  object fila: TEdit
+    Left = 744
+    Top = 21
+    Width = 160
+    Height = 36
+    TabOrder = 8
+    Text = 'filai'
+  end
+  object columnai: TEdit
+    Left = 744
+    Top = 63
+    Width = 160
+    Height = 34
+    TabOrder = 9
+    Text = 'columnai'
+  end
+  object direccion: TEdit
+    Left = 928
+    Top = 21
+    Width = 121
+    Height = 34
+    TabOrder = 10
+    Text = 'direccion'
+  end
+  object palabra: TEdit
+    Left = 928
+    Top = 71
+    Width = 233
+    Height = 34
+    TabOrder = 11
+    Text = 'palabra'
+  end
   object MainMenu1: TMainMenu
-    Left = 816
+    Left = 600
     Top = 16
     object VectoresReales1: TMenuItem
       Caption = 'Vectores Reales'
@@ -175,6 +207,14 @@ object Form4: TForm4
       object Mostrar1: TMenuItem
         Caption = 'Mostrar'
         OnClick = Mostrar1Click
+      end
+      object QuickShortAscendente1: TMenuItem
+        Caption = 'QuickShort Ascendente'
+        OnClick = QuickShortAscendente1Click
+      end
+      object ejercicio1: TMenuItem
+        Caption = 'Ejercicio Temperatura'
+        OnClick = ejercicio1Click
       end
     end
     object VectoresString1: TMenuItem
@@ -208,6 +248,21 @@ object Form4: TForm4
       object Mostrar2: TMenuItem
         Caption = 'Mostrar'
         OnClick = Mostrar2Click
+      end
+    end
+    object Examen1: TMenuItem
+      Caption = 'Examen'
+      object Examen2: TMenuItem
+        Caption = 'Examen'
+        OnClick = Examen2Click
+      end
+      object RedimensionarMatriz1: TMenuItem
+        Caption = 'Redimensionar Matriz'
+        OnClick = RedimensionarMatriz1Click
+      end
+      object VaciarMatriz1: TMenuItem
+        Caption = 'Vaciar Matriz'
+        OnClick = VaciarMatriz1Click
       end
     end
   end

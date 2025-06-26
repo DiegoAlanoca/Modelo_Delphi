@@ -33,6 +33,16 @@ type
     MatricesChar1: TMenuItem;
     Registrar4: TMenuItem;
     Mostrar2: TMenuItem;
+    QuickShortAscendente1: TMenuItem;
+    ejercicio1: TMenuItem;
+    Examen1: TMenuItem;
+    Examen2: TMenuItem;
+    RedimensionarMatriz1: TMenuItem;
+    VaciarMatriz1: TMenuItem;
+    fila: TEdit;
+    columnai: TEdit;
+    direccion: TEdit;
+    palabra: TEdit;
     procedure ScrollBarVectChange(Sender: TObject);
     procedure ScrollBar1Change(Sender: TObject);
     procedure ScrollBarMatrChange(Sender: TObject);
@@ -45,6 +55,11 @@ type
     procedure Registrar4Click(Sender: TObject);
     procedure Registrar3Click(Sender: TObject);
     procedure Mostrar2Click(Sender: TObject);
+    procedure QuickShortAscendente1Click(Sender: TObject);
+    procedure ejercicio1Click(Sender: TObject);
+    procedure Examen2Click(Sender: TObject);
+    procedure RedimensionarMatriz1Click(Sender: TObject);
+    procedure VaciarMatriz1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +75,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm4.ejercicio1Click(Sender: TObject);
+begin
+  vr.EjercicioTemp;
+end;
+
+procedure TForm4.Examen2Click(Sender: TObject);
+begin
+  mc.Examen(StrToInt(fila.Text),StrToInt(columnai.Text),StrToInt(direccion.Text),palabra.Text) ;
+end;
 
 procedure TForm4.FormCreate(Sender: TObject);
 begin
@@ -101,10 +126,21 @@ begin
       StringGridMatr.Cells[J-1,I-1]:=mc.getValue(I,J);
 end;
 
+procedure TForm4.QuickShortAscendente1Click(Sender: TObject);
+begin
+  vr.ExeQuicksortAscend;
+end;
+
+procedure TForm4.RedimensionarMatriz1Click(Sender: TObject);
+begin
+  mc.ReDimensionar(StringGridMatr.RowCount,StringGridMatr.ColCount);
+  Showmessage(IntTOStr(mc.Filas)+' '+IntTOStr(mc.Columnas));
+end;
+
 procedure TForm4.Registar1Click(Sender: TObject);
 var I:Word;
 begin
-  I:=0;
+  I:=0; vr.EmptyVec;
   while (I<=VectorForm.ColCount-1)and(VectorForm.Cells[I,0]<>'') do
   begin
     vr.AddElement(StrToFloat(VectorForm.Cells[I,0]));
@@ -115,7 +151,7 @@ end;
 procedure TForm4.Registrar1Click(Sender: TObject);
 var I:Word;
 begin
-  I:=0;
+  I:=0; vs.EmptyVec;
   while (I<=VectorForm.ColCount-1)and(VectorForm.Cells[I,0]<>'') do
   begin
     vs.AddElement(VectorForm.Cells[I,0]);
@@ -148,7 +184,10 @@ begin
   mc.ReDimensionar(StringGridMatr.RowCount,StringGridMatr.ColCount);
   for I := 1 to mc.Filas do
     for J := 1 to mc.Columnas do
-      mc.setValue(I,J,StringGridMatr.Cells[J-1,I-1][1]);
+      if StringGridMatr.Cells[J-1,I-1][1]<>'' then
+        mc.setValue(I,J,StringGridMatr.Cells[J-1,I-1][1])
+      else
+        mc.setValue(I,J,' ');
 end;
 
 procedure TForm4.ScrollBar1Change(Sender: TObject);
@@ -164,6 +203,11 @@ end;
 procedure TForm4.ScrollBarVectChange(Sender: TObject);
 begin
   VectorForm.ColCount:=ScrollBarVect.Position;
+end;
+
+procedure TForm4.VaciarMatriz1Click(Sender: TObject);
+begin
+  mc.VaciarMatriz;
 end;
 
 end.

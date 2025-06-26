@@ -17,6 +17,11 @@ type
     Procedure DelElement(p:Word);
     Procedure ChangeElement(p:Word;e:Real);
     Procedure InsElem(p:Word;e:Real);
+    Procedure EmptyVec;
+    Procedure ExeQuicksortAscend;
+    Procedure QuicksortAscend(izq,der:Integer);
+    Procedure Intercambiar(p1,p2:Word);
+    Procedure EjercicioTemp;
 end;
 
 type
@@ -32,6 +37,7 @@ type
     Procedure DelElement(p:Word);
     Procedure ChangeElement(p:Word;e:String);
     Procedure InsElem(p:Word;e:String);
+    Procedure EmptyVec;
     Function ContarVocalesUnicas(const Texto: string): Integer;
 end;
 
@@ -65,6 +71,46 @@ begin
   else raise Exception.Create('Posicion No valida'+IntToStr(p));
 end;
 
+procedure VectoresReales.EjercicioTemp;
+var PromedioValido,ValorErrMax:Real;
+CantPromeVal,CantidaAtipicos,I:Integer;
+begin
+  PromedioValido:=0;  CantPromeVal:=0; ValorErrMax:=-990;
+  CantidaAtipicos:=0;
+  for I:=1 to Dimension do
+  begin
+    if (VectorReal[I]>0)and(VectorReal[I]<100) then
+    begin
+      PromedioValido:=PromedioValido+VectorReal[I];
+      Inc(CantPromeVal);
+    end
+    else
+    begin
+      if VectorReal[I]>100 then
+        Inc(CantidaAtipicos)
+      else
+        ValorErrMax:=VectorReal[I];
+    end;
+  end;
+  Showmessage('PromedioValido'+FloatToStr(PromedioValido/CantPromeVal));
+  Showmessage('Cantidad Atipicos'+IntToStr(CantidaAtipicos));
+  Showmessage('Valor Error Maximo'+FloatToStr(ValorErrMax));
+end;
+
+procedure VectoresReales.EmptyVec;
+var I: Integer;
+begin
+  Dimension:=0;
+  for I:=1 to MaxE do
+    VectorReal[I]:=0;
+end;
+
+procedure VectoresReales.ExeQuicksortAscend;
+begin
+  if Dimension > 1 then
+    QuicksortAscend(1,dimension);
+end;
+
 function VectoresReales.GetDimension: Word;
 begin
   result:=Dimension;
@@ -89,6 +135,42 @@ begin
     VectorReal[p]:=e;
   end
   else raise Exception.Create('Posicion No valida'+IntToStr(p));
+end;
+
+procedure VectoresReales.Intercambiar(p1, p2: Word);
+var aux:Real;
+begin
+  if (p1>0)and(p1<=Dimension)and(p2>0)and(p2<=Dimension) then
+  begin
+    aux:=VectorReal[p1];
+    VectorReal[p1]:=VectorReal[p2];
+    VectorReal[p2]:=aux;
+  end
+  else raise Exception.Create('Posicion No valida'+IntToStr(p1)
+  +IntToStr(p2));
+
+end;
+
+procedure VectoresReales.QuicksortAscend(izq, der: Integer);
+var i, j: Integer; pivote, aux: Real;
+begin
+  i := izq;
+  j := der;
+  pivote := VectorReal[(izq + der) div 2];
+  repeat
+    while VectorReal[i] < pivote do i := i + 1;
+    while VectorReal[j] > pivote do j := j - 1;
+    if i <= j then
+    begin
+      Intercambiar(i,j);
+      i := i + 1;
+      j := j - 1;
+    end;
+  until i > j;
+  if izq < j then
+    QuicksortAscend(izq,j);
+  if i < der then
+    QuicksortAscend(i,der);
 end;
 
 procedure VectoresReales.Redimensionar(d: Word);
@@ -139,6 +221,14 @@ begin
     Dec(Dimension);
   end
   else raise Exception.Create('Posicion No valida'+IntToStr(p));
+end;
+
+procedure VectoresString.EmptyVec;
+var I: Integer;
+begin
+  Dimension:=0;
+  for I:=1 to MaxE do
+    VectorString[I]:=#0;
 end;
 
 function VectoresString.GetDimension: Word;
